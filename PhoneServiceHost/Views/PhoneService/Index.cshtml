@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhoneService</title>
+
+    @* External dependencies *@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/signalr/jquery.signalR.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/lib/jsrender/jsrender.min.js"></script>
+    <script src="~/lib/moment/min/moment.min.js"></script>
+
+    @* ServiceData refresh logic *@
+    <script type="text/javascript">
+        (function($) {
+
+            var serviceDataTemplate;
+            var serviceDataContainer;
+
+            $(document).ready(function() {
+
+                // setup format converters
+                $.views.converters({
+                    dateTime: function(val) { return moment(val).format('MMMM DD YYYY HH:mm'); },
+                        time: function(val) { return moment(val, 'HH:mm:ss').format('HH:mm'); }
+                });
+
+                // locate template and container
+                serviceDataTemplate = $.templates('#serviceDataTemplate');
+                serviceDataContainer = $('#serviceDataContainer');
+
+                // reload page on SignalR error
+                $.connection.hub.error(function () {
+                    location.reload();
+                });
+
+                function updateServiceData() {
+                    $.getJSON('/data', function (serviceData) {
+                        var contentHtml = serviceDataTemplate.render(serviceData);
+                        serviceDataContainer.html(contentHtml);
+                    });
+                }
+
+                // add data update handler
+                $.connection.phoneServiceHub.client.updateData = updateServiceData;
+                
+                // start listening
+                $.connection.hub.start();
+
+                // initial data load
+                updateServiceData();
+            });
+
+        })(jQuery);
+
+    </script>
+
+    @* Jsrender template to be used for ServiceData rendering *@
+    <script type="text/x-jsrender" id="serviceDataTemplate">
+        {{if}}
+            Request sequence id: {{:index}}<br>
+            {{if state}}
+                Phone: {{:state.number}}<br>
+                {{if state.isActive }}
+                    Language: {{:state.language}}<br>
+                    Service active until {{dateTime:state.end}}<br>
+                    {{if state.isXlActive }}
+                        XL-service active
+                        ({{time:state.xlActivationTime}} &ndash; 
+                            {{time:state.xlEndTime}})
+                        in {{:state.xlLanguage}} language<br>
+                    {{else}}
+                        XL-service inactive<br>
+                    {{/if}}
+                    {{if state.isOverrideListUsed }}
+                        Except for<br>
+                        <table>
+                            <tr>
+                                <th>Phone</th>
+                                <th>Name</th>
+                            </tr>
+                            {{for state.overrideList}}
+                                {{if #index % 2}}
+                                    <tr class="odd">
+                                {{else}}
+                                    <tr>
+                                {{/if}}
+                                    <td>{{:phone}}</td>
+                                    <td>{{:name}}</td>
+                                </tr>
+                            {{/for}}
+                        </table>
+                    {{/if}}
+                {{else}}
+                    Service inactive
+                {{/if}}
+            {{else}}
+                Service data is missing or invalid.
+            {{/if}}
+        {{else}}
+            Obtaining service data, please wait...
+        {{/if}}
+    </script>
+
+    @* Page specific styling *@
+    <style type="text/css">
+        body   { font-family: 'Segoe UI', sans-serif; font-size: 14pt; line-height: 20pt; } 
+        table  { border-collapse: collapse; margin-left:-2px }
+        td, th { padding: 4px 15px 4px 2px; }
+        th     { font-weight: normal; text-align: left; background-color: #f2f2f2; }
+        tr.odd { background-color: #fcfcfc; }
+    </style>
+
+</head>
+<body>
+    @* Container element to host the actual ServiceData content *@
+    <div id="serviceDataContainer"></div>
+</body>
+</html>

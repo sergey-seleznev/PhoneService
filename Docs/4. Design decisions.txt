@@ -1,0 +1,33 @@
+1) ASP.NET background work
+
+The task includes periodic legacy source contacting in order to updates the data.
+A common answer for such a case is performing the updates in a background thread.
+Our particular task requires this to be done from within an ASP.NET web application.
+Unfortunately, this involves a known ASP.NET & IIS background work running limitation:
+https://forums.asp.net/t/2051150.aspx?How+do+I+run+Background+Tasks+in+ASP+NET+Web+Api
+http://www.hanselman.com/blog/HowToRunBackgroundTasksInASPNET.aspx
+There are some special workarounds and frameworks available but they all require
+additional nontrivial logic and/or extra infrastructure (HangFire needs a database).
+
+I decided to make use of the particular task details in order to simplify the solution.
+Actually we need the data for immediate display purposes only. We do not accumulate it at all.
+Hence we in fact do not need the data listener to run all the time on the server.
+On the opposite, when a client connects to the server, the server actuates some routines.
+In particular, ASP.NET Core MVC provides the pre-configured DI services.
+In case of any failure or web host relaunch, the server will recreate those services for us.
+So I wrap the listener and its update thread into a DI service, and use it in the controller.
+Although this leads to some potential delays during the initial data access, this allows
+to stay away from using external processes and tricky workarounds.
+I beleive this solution will suit the current task needs.
+
+An alternative approach could be using an external process (i.e. Windows service), that
+will always remain active, and will pass the actual data to the Web service for serving.
+This may be achieved with a special secured Web service API method.
+
+2) Instant UI update
+
+As far as we have the legacy provider service instance in hand in the controller,
+the service will notify us about data updates with its event. Thus it is straightforward
+for us to handle the event and call all the clients to refresh their content.
+I used SignalR library to accomplish server-side push notifications.
+While using modern browser features like WebSockets, the resulting UI refreshes immediately.

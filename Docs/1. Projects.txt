@@ -1,0 +1,26 @@
+Welcome!
+
+The proposed task solution contains a number of .NET Core projects:
+
+1) PhoneService project (class library)
+contains core task functionality, that can be used with any frontend.
+The main entry point is PhoneService class implementing IPhoneService interface.
+PhoneService requires a number of customization parameters to be supplied.
+When created, it runs data update cycle, and fires the corresponding update events.
+A customer (usually frontend code) may handle these events and get the data.
+
+2) PhoneServiceHost project (web-host executable)
+is a host project for both Web API to get JSON data, and a user Web interface.
+It uses PhoneService class instance in order to get the data to display.
+Since the data provider pushes the notifications, the UI is able to easily
+update its content almost the same time using SignalR library.
+
+3) Tests/PhoneService.UnitTests project (test class library)
+is PhoneService's core functionality unit test container.
+The tests are devided into classes by the target testing classtypes.
+PhoneService.dll code is 100% unit test covered.
+
+4) Tests/PhoneService.IntegrationTests project (test class library)
+features the system's Web API service integration tests.
+Its result is the complete configured solution behavior verification
+from the legacy data source to the Web API generated JSON content.

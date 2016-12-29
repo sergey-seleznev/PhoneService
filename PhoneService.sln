@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PhoneServiceHost", "PhoneServiceHost\PhoneServiceHost.xproj", "{635B55CF-B3A5-4C25-8B85-2ECB65CB9B57}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PhoneService", "PhoneService\PhoneService.xproj", "{F4440DA9-0942-44B2-BE71-4388986712F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{FD8CBC67-52F3-4668-BD01-77DE255BC5D7}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\1. Projects.txt = Docs\1. Projects.txt
+		Docs\2. Requirements.txt = Docs\2. Requirements.txt
+		Docs\3. Configuration.txt = Docs\3. Configuration.txt
+		Docs\4. Design decisions.txt = Docs\4. Design decisions.txt
+		Docs\5. API specification.txt = Docs\5. API specification.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EE63543F-996A-43D4-970F-E997D292AEA7}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PhoneService.UnitTests", "PhoneService.UnitTests\PhoneService.UnitTests.xproj", "{CC31FB29-EC8A-44F6-80A6-895B5C8CD90F}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PhoneService.IntegrationTests", "PhoneService.IntegrationTests\PhoneService.IntegrationTests.xproj", "{870AA550-F06C-4AA4-8896-C1BD0BEDB7E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{635B55CF-B3A5-4C25-8B85-2ECB65CB9B57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{635B55CF-B3A5-4C25-8B85-2ECB65CB9B57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{635B55CF-B3A5-4C25-8B85-2ECB65CB9B57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{635B55CF-B3A5-4C25-8B85-2ECB65CB9B57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4440DA9-0942-44B2-BE71-4388986712F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4440DA9-0942-44B2-BE71-4388986712F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4440DA9-0942-44B2-BE71-4388986712F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4440DA9-0942-44B2-BE71-4388986712F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC31FB29-EC8A-44F6-80A6-895B5C8CD90F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC31FB29-EC8A-44F6-80A6-895B5C8CD90F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC31FB29-EC8A-44F6-80A6-895B5C8CD90F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC31FB29-EC8A-44F6-80A6-895B5C8CD90F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{870AA550-F06C-4AA4-8896-C1BD0BEDB7E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{870AA550-F06C-4AA4-8896-C1BD0BEDB7E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{870AA550-F06C-4AA4-8896-C1BD0BEDB7E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{870AA550-F06C-4AA4-8896-C1BD0BEDB7E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CC31FB29-EC8A-44F6-80A6-895B5C8CD90F} = {EE63543F-996A-43D4-970F-E997D292AEA7}
+		{870AA550-F06C-4AA4-8896-C1BD0BEDB7E1} = {EE63543F-996A-43D4-970F-E997D292AEA7}
+	EndGlobalSection
+EndGlobal

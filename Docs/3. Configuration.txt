@@ -1,0 +1,23 @@
+In order to increase project flexibility a number of configuration options is provided.
+Those options are located in the solution's entry point project - PhoneServiceHost.
+A common configuration approach of using appsettings.json file is used.
+
+1) PhoneServiceHost/appsettings.json > LegacyDataSourceOptions section
+   is used to configure the legacy data source reader:
+      - FileUriFormat: a C# format string for composing legacy data resouce file uri
+                      (with a single integer argument available at the zero index {0})
+      - FirstIndex, LastIndex: legacy data resource request sequence range (including boundaries)
+      - UpdateIntervalMSec: delay duration between each subsequent updates (in milliseconds)
+
+2) PhoneServiceHost/appsettings.json > LanguageOptions section
+   is used to dynamically map legacy data language codes to the corresponding language names
+      - Languages: a key-value collection of the languages (code-name)
+
+---
+There's an advanced ability to tune-up the legacy data format parsing.
+This may be useful in case of a minor format specification modification.
+For example, field length, order or charset change can be fixed with no code correction.
+This is achieved with a resource file:
+PhoneService/ServiceData/ServiceDataContent/ServiceDataContent.regex.
+The file contains a regex pattern expression loaded and used for legacy data parsing.
+Although this operation requires the solution rebuild, it may simplify the changes.

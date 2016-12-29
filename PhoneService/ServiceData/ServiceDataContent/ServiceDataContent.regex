@@ -1,0 +1,16 @@
+﻿# Service data content parse regex:
+# (use with RegexOptions.IgnorePatternWhitespace option)
+\A\s*					#    string beginning
+(?<A>[AP])				# A: service status: A active / P passive (1 symbol)
+(?<B>.{20})				# B: phone number (20 symbols)
+(?<C>[JE])				# C: XL-additional service status: J yes / E no (1 symbol)
+(?<D>[\w\s])			# D: service language: E Estonian, I English (1 symbol)
+(?<E>[\w\s])			# E: XL-additional service language (1 symbol)
+(?<F>[\d\s]{8})			# F: service end date YYYYMMDD (8 symbols)
+(?<G>[\d\s]{4})			# G: service end time ttmm (4 symbols)
+(?<H>[\d\s]{4})			# H: XL service activation time ttmm (4 symbols)
+(?<I>[\d\s]{4})			# I: XL service end time ttmm (4 symbols)
+(?<J>[KE])				# J: override list: K in use / E not in use (1 symbol)
+((?<K>.{15}){8}			# K: phone numbers (15 symbols * 8 = 120 symbols)
+ (?<L>.{20}){8})?		# L: names (20 symbols * 8 = 160 symbols)
+\s*\z					#    string end

@@ -1,0 +1,10 @@
+{
+  "name": "phone-service-host",
+  "private": true,
+  "dependencies": {
+    "jquery": "3.1.1",
+    "signalr": "2.2.1",
+    "jsrender": "0.9.75",
+    "moment": "2.2.1"
+  }
+}

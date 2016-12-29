@@ -1,0 +1,90 @@
+Web service API specification
+
+1. Obtaining current phone service data
+
+Method: GET
+Path: /data
+
+Request Auth: -
+Request Parameters: -
+Request Message Body: -
+
+Response Statuses: 200 (success), 204 (no content)
+Response Content Type: application/json
+Response Charset: utf-8
+
+Example Request: retrieve current phone service data
+
+   GET /data
+   Host: http://localhost:19278
+
+Example Response: current phone service data not available yet - please retry later
+
+   HTTP/1.1 204 No content
+
+Example Response: current phone service data is missing or invalid for a particular request index
+
+   HTTP/1.1 200 OK
+   Content-Type: application/json; charset=utf-8
+
+   {
+     "index": 8
+   }
+
+Example Response: current phone service data
+
+   HTTP/1.1 200 OK
+   Content-Type: application/json; charset=utf-8
+
+   {
+     "index": 3,
+     "state": {
+      "isActive": true,
+      "number": "0551234555",
+      "language": "English",
+      "end": "2011-11-11T21:59:00+02:00",
+      "isXlActive": true,
+      "xlLanguage": "English",
+      "xlActivationTime": "08:00:00",
+      "xlEndTime": "20:59:00",
+      "isOverrideListUsed": true,
+      "overrideList": [
+        {
+         "phone": "0552212211",
+         "name": "Rein Ratas"
+        },
+        {
+         "phone": "0506669999",
+         "name": ""
+        }
+      ]
+     }
+   }
+
+Successful response content description:
+(see legacy data specification also)
+
+   {
+     "index": 3,							// request index
+     "state": {								// data container
+      "isActive": true,						// service active bool state
+      "number": "0551234555",				// service phone number
+      "language": "English",				// service language string
+      "end": "2011-11-11T21:59:00+02:00",	// service end datetime
+      "isXlActive": true,					// XL-service active bool state
+      "xlLanguage": "English",				// XL-service language string
+      "xlActivationTime": "08:00:00",		// XL-service activation time
+      "xlEndTime": "20:59:00",				// XL-service end time
+      "isOverrideListUsed": true,			// override list usage bool flag
+      "overrideList": [						// override list container
+        {									// override list item container
+         "phone": "0552212211",				// override list item phone number
+         "name": "Rein Ratas"				// override list item name
+        },
+        {
+         "phone": "0506669999",
+         "name": ""
+        }
+      ]
+     }
+   }

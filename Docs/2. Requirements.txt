@@ -1,0 +1,23 @@
+In order to run the project, verify the following software configuration:
+
+   1) Windows 10 x64
+     (Windows 7/8/10 x86/x64 should also suit, but not tested)
+
+   2) Visual Studio 2015 (any edition)
+      with Microsoft Web Developer Tools
+
+   3) .NET Core 1.1 SDK
+      x64: https://go.microsoft.com/fwlink/?LinkID=835014
+      x86: https://go.microsoft.com/fwlink/?LinkID=834981
+
+   4) Visual Studio 2015 .NET Core Tools
+      https://go.microsoft.com/fwlink/?LinkId=827546
+
+  *5) Please note: after NuGet package restore process completed
+      it's recommended to restart the IDE in order to correctly execute
+      the tests and the web host (IIS Express integration may fail otherwise).
+
+---
+Since .NET Core is used, the solution should be able to run on Linux as well!
+The testing hasn't been completed till the submission, it is in progress.
+Please feel free to ask me regarding the updates on this topic.
